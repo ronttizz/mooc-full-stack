@@ -4,10 +4,12 @@ sequenceDiagram
     participant server
 
     Note right of browser: User makes new note in browser
-
-    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
     
     Note right of browser: Form submit sends data to server and reload browser
+
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+
+    Note left of server: Server adds the received note to list of notes
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
     activate server
