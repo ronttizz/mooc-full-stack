@@ -11,9 +11,9 @@ const App = () => {
   // const part3 = 'State of a component'
   // const exercises3 = 14
   const parts = [
-    ['Fundamentals of React', 10],
-    ['Using props to pass data', 7],
-    ['State of a component',14],
+    {name: 'Fundamentals of React', exercises: 10},
+    {name: 'Using props to pass data', exercises: 7},
+    {name: 'State of a component',exercises: 14},
   ]
 
   return (
