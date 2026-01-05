@@ -1,6 +1,6 @@
 const Total = (props) => {
     let total_n = 0
-    props.parts.forEach(element => total_n += element[1])
+    props.parts.forEach(element => total_n += element.exercises)
 
     return (
         <>
