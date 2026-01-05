@@ -4,9 +4,11 @@ const Content = (props) => {
     const parts = props.parts
     
     return(
-        <>
-            {parts.map(element => <Part part={element.name} exercises={element.exercises} key={element.name} />)}
-        </>
+        <div>
+            <Part part={parts[0].name} exercises={parts[0].exercises} />
+            <Part part={parts[1].name} exercises={parts[1].exercises} />
+            <Part part={parts[1].name} exercises={parts[1].exercises} />
+        </div>
     )
 }
 
