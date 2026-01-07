@@ -14,6 +14,14 @@ const App = () => {
     }
   }
 
+  const positive = () => {
+    if (good + neutral + bad === 0) {
+      return 0
+    } else {
+      return (good/(good+neutral+bad))*100
+    }
+  }
+
   return (
   <div>
     <h1>give feedback</h1>
@@ -28,6 +36,7 @@ const App = () => {
     <p>bad {bad}</p>
     <p>all {good + neutral + bad}</p>
     <p>average {average()}</p>
+    <p>positive {positive()} %</p>
   </div>
   )
 }
