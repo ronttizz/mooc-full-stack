@@ -6,7 +6,8 @@ import Filter from './components/Filter'
 const App = () => {
   const emptyPerson = {
     name: '',
-    number: ''
+    number: '',
+    id: null
   }
   const [persons, setPersons] = useState([
     { name: 'Arto Hellas', number: '040-123456', id: 1 },
@@ -26,7 +27,8 @@ const App = () => {
       const personsCopy = [...persons]
       setPersons(personsCopy.concat({
         name: newPerson.name,
-        number: newPerson.number
+        number: newPerson.number,
+        id: personsCopy.length + 1
       }))
       setNewPerson(emptyPerson)
     }
