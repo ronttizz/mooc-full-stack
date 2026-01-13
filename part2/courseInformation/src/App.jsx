@@ -1,6 +1,4 @@
-import Header from './Header'
-import Content from './Content'
-import Total from './Total'
+import Course from './Course'
 
 const App = () => {
   const courses = [
@@ -52,11 +50,7 @@ const App = () => {
     <div>
       <h1>Web development curriculum</h1>
       {courses.map(course => 
-        <div key={course.id}>
-          <Header course={course.name} />
-          <Content parts={course.parts} />
-          <Total parts={course.parts} />
-        </div>
+        <Course name={course.name} parts={course.parts} key={course.id} />
       )}
     </div>
   )
