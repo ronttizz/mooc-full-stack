@@ -4,6 +4,7 @@ import PersonForm from './components/PersonForm'
 import Filter from './components/Filter'
 
 const App = () => {
+  // States
   const emptyPerson = {
     name: '',
     number: '',
@@ -18,6 +19,7 @@ const App = () => {
   const [newPerson, setNewPerson] = useState(emptyPerson)
   const [searchTerm, setSearchTerm] = useState('')
 
+  // Handle functions
   const handleSubmit = (event) => {
     event.preventDefault()
     if (persons.some((person) => newPerson.name === person.name)) {
