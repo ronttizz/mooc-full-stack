@@ -6,12 +6,13 @@ const App = () => {
     number: ''
   }
   const [persons, setPersons] = useState([
-    {
-      name: 'Arto Hellas',
-      number: '040-1234567'
-    }
+    { name: 'Arto Hellas', number: '040-123456', id: 1 },
+    { name: 'Ada Lovelace', number: '39-44-5323523', id: 2 },
+    { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
+    { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 }
   ]) 
   const [newPerson, setNewPerson] = useState(emptyPerson)
+  const [searchTerm, setSearchTerm] = useState('')
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -40,19 +41,28 @@ const App = () => {
     setNewPerson(newPersonCopy)
   }
 
+  const handleSearchTermChange = (event) => {
+    setSearchTerm(event.target.value)
+  }
+
   return (
     <div>
       <h2>Phonebook</h2>
+      <input onChange={handleSearchTermChange} value={searchTerm} />
+        <div>debug: {searchTerm}</div>
       <form onSubmit={handleSubmit}>
         <div>name: <input onChange={handleNameChange} value={newPerson.name} /></div>
         <div>number: <input onChange={handleNumberChange} value={newPerson.number} /></div>
         <div><button type="submit">add</button></div>
-        <div>debug: {newPerson.name} {newPerson.number}</div>
       </form>
       <h2>Numbers</h2>
-      {persons.map(person => 
-        <div key={person.name}>{person.name} {person.number}</div>
-      )}
+      {persons.map(person => {
+        if (!searchTerm) {
+          return <div key={person.id}>{person.name} {person.number}</div>
+        } else if (person.name.toLowerCase().includes(searchTerm.toLowerCase())) {
+          return <div key={person.id}>{person.name} {person.number}</div>
+        }
+      })}
     </div>
   )
 }
