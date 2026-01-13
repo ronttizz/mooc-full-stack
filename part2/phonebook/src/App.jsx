@@ -49,7 +49,6 @@ const App = () => {
     <div>
       <h2>Phonebook</h2>
       <input onChange={handleSearchTermChange} value={searchTerm} />
-        <div>debug: {searchTerm}</div>
       <form onSubmit={handleSubmit}>
         <div>name: <input onChange={handleNameChange} value={newPerson.name} /></div>
         <div>number: <input onChange={handleNumberChange} value={newPerson.number} /></div>
