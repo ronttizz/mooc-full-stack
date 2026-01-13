@@ -8,9 +8,20 @@ const App = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    const personsCopy = [...persons]
-    setPersons(personsCopy.concat({name: newName}))
-    setNewName('')
+    let found = false
+    persons.forEach(person => {
+      if (newName === person.name) {
+        found = true
+      }
+    })
+    if (found) {
+      alert(`${newName} is already added to phonebook`)
+      setNewName('')
+    } else {
+      const personsCopy = [...persons]
+      setPersons(personsCopy.concat({name: newName}))
+      setNewName('')
+    }
   }
 
   const handleChange = (event) => {
