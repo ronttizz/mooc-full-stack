@@ -48,7 +48,8 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <input onChange={handleSearchTermChange} value={searchTerm} />
+      <div>filter shown with <input onChange={handleSearchTermChange} value={searchTerm} /></div>
+      <h2>add a new</h2>
       <form onSubmit={handleSubmit}>
         <div>name: <input onChange={handleNameChange} value={newPerson.name} /></div>
         <div>number: <input onChange={handleNumberChange} value={newPerson.number} /></div>
