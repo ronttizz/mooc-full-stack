@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Person from './components/Person'
 
 const App = () => {
   const emptyPerson = {
@@ -58,9 +59,9 @@ const App = () => {
       <h2>Numbers</h2>
       {persons.map(person => {
         if (!searchTerm) {
-          return <div key={person.id}>{person.name} {person.number}</div>
+          return <Person key={person.id} name={person.name} number={person.number} />
         } else if (person.name.toLowerCase().includes(searchTerm.toLowerCase())) {
-          return <div key={person.id}>{person.name} {person.number}</div>
+          return <Person key={person.id} name={person.name} number={person.number} />
         }
       })}
     </div>
