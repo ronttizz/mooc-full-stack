@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Person from './components/Person'
+import PersonForm from './components/PersonForm'
 
 const App = () => {
   const emptyPerson = {
@@ -50,13 +51,14 @@ const App = () => {
     <div>
       <h2>Phonebook</h2>
       <div>filter shown with <input onChange={handleSearchTermChange} value={searchTerm} /></div>
-      <h2>add a new</h2>
-      <form onSubmit={handleSubmit}>
-        <div>name: <input onChange={handleNameChange} value={newPerson.name} /></div>
-        <div>number: <input onChange={handleNumberChange} value={newPerson.number} /></div>
-        <div><button type="submit">add</button></div>
-      </form>
-      <h2>Numbers</h2>
+      <h3>add a new</h3>
+      <PersonForm
+        onSubmit={handleSubmit}
+        nameHandler={handleNameChange}
+        numberHandler={handleNumberChange}
+        data={newPerson}
+        />
+      <h3>Numbers</h3>
       {persons.map(person => {
         if (!searchTerm) {
           return <Person key={person.id} name={person.name} number={person.number} />
