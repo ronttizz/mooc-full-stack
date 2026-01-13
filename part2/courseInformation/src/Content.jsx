@@ -5,9 +5,9 @@ const Content = (props) => {
     
     return(
         <div>
-            <Part part={parts[0].name} exercises={parts[0].exercises} />
-            <Part part={parts[1].name} exercises={parts[1].exercises} />
-            <Part part={parts[1].name} exercises={parts[1].exercises} />
+            {parts.map(part => 
+                <Part part={part.name} exercises={part.exercises} key={part.id} />
+            )}
         </div>
     )
 }

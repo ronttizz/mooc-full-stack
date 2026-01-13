@@ -1,6 +1,6 @@
 const Part = (props) => {
     return (
-        <p>
+        <p key={props.id}>
             {props.part} {props.exercises}
         </p>
     )
