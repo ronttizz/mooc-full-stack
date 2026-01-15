@@ -10,8 +10,8 @@ const App = () => {
   useEffect(() => {
     noteService
       .getAll()
-      .then(response => {
-        setNotes(response.data)
+      .then(initialNotes => {
+        setNotes(initialNotes)
       })
   }, [])
 
@@ -24,8 +24,8 @@ const App = () => {
 
     noteService
       .create(noteObject)
-      .then(response => {
-        setNotes(notes.concat(response.data))
+      .then(returnedNote => {
+        setNotes(notes.concat(returnedNote))
         setNewNote('')
       })
   }
@@ -34,16 +34,16 @@ const App = () => {
     setNewNote(event.target.value)
   }
 
-const toggleImportanceOf = id => {
-  const note = notes.find(n => n.id === id)
-  const changedNote = { ...note, important: !note.important }
+  const toggleImportanceOf = id => {
+    const note = notes.find(n => n.id === id)
+    const changedNote = { ...note, important: !note.important }
 
-  noteService
-    .update(id, changedNote)
-    .then(response => {
-      setNotes(notes.map(note => note.id === id ? response.data : note))
-    })
-}
+    noteService
+      .update(id, changedNote)
+      .then(returnedNote => {
+        setNotes(notes.map(note => note.id === id ? returnedNote : note))
+      })
+  }
 
   const notesToShow = showAll ? notes : notes.filter((note) => note.important)
 
