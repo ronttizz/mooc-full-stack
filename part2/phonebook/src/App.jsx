@@ -73,9 +73,9 @@ const App = () => {
       <h3>Numbers</h3>
       {persons.map(person => {
         if (!searchTerm) {
-          return <Person key={person.id} name={person.name} number={person.number} />
+          return <Person key={person.id} name={person.name} number={person.number} id={person.id} />
         } else if (person.name.toLowerCase().includes(searchTerm.toLowerCase())) {
-          return <Person key={person.id} name={person.name} number={person.number} />
+          return <Person key={person.id} name={person.name} number={person.number} id={person.id} />
         }
       })}
     </div>
