@@ -1,5 +1,8 @@
 const Person = ({name, number, id}) => {
-  return <div>{name} {number}</div>
+  const deletePerson = (id) => {
+    console.log(`delete ${id}`)
+  }
+  return <div>{name} {number} <button onClick={() => deletePerson(id)}>delete</button></div>
 }
 
 export default Person

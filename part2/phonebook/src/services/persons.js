@@ -13,4 +13,9 @@ const createNew = newObject => {
     return req.then(res => res.data)
 }
 
-export default { getAll, createNew }
+const deleteEntry = id => {
+    const req = axios.delete(baseUrl, id)
+    return req.then(res => res.data)
+}
+
+export default { getAll, createNew, deleteEntry }
