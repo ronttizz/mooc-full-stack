@@ -53,7 +53,7 @@ const App = () => {
 
   // Data fetching
   const fetchData = () => {
-    personsService.getPersons().then(personsData =>{
+    personsService.getAll().then(personsData =>{
       setPersons(personsData)
     })
   }

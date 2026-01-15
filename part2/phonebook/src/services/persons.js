@@ -2,7 +2,7 @@ import axios from "axios";
 
 const baseUrl = 'http://localhost:3001/persons'
 
-const getPersons = () => {
+const getAll = () => {
     const req = axios.get(baseUrl)
     const data = req.then(response => response.data)
     return data
@@ -13,4 +13,4 @@ const createNew = newObject => {
     return req.then(res => res.data)
 }
 
-export default { getPersons, createNew }
+export default { getAll, createNew }
