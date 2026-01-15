@@ -23,13 +23,15 @@ const App = () => {
       alert(`${newPerson.name} is already added to phonebook`)
       setNewPerson(emptyPerson)
     } else {
-      const personsCopy = [...persons]
-      setPersons(personsCopy.concat({
-        name: newPerson.name,
-        number: newPerson.number,
-        id: personsCopy.length + 1
-      }))
-      setNewPerson(emptyPerson)
+      personsService
+        .createNew({
+          name: newPerson.name,
+          number: newPerson.number
+        })
+        .then(res => {
+          setPersons(persons.concat(res))
+          setNewPerson(emptyPerson)
+        })
     }
   }
 
