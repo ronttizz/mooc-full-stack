@@ -3,6 +3,7 @@ import personsService from './services/persons'
 import Person from './components/Person'
 import PersonForm from './components/PersonForm'
 import Filter from './components/Filter'
+import Notification from './components/Notification'
 
 const App = () => {
   // States
@@ -11,9 +12,11 @@ const App = () => {
     number: '',
     id: null
   }
+  const emptyError = {message: '', level: null}
   const [persons, setPersons] = useState([])
   const [newPerson, setNewPerson] = useState(emptyPerson)
   const [searchTerm, setSearchTerm] = useState('')
+  const [notification, setNotification] = useState(emptyError)
 
   // Handle functions
   const handleSubmit = (event) => {
@@ -38,6 +41,13 @@ const App = () => {
         .then(res => {
           setPersons(persons.concat(res))
           setNewPerson(emptyPerson)
+          setNotification({
+            message: `Added ${res.name}`,
+            level: 'success'
+          })
+          setTimeout(() => {
+            setNotification(emptyError)
+          }, 5000)
         })
     }
   }
@@ -70,6 +80,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={notification.message} level={notification.level} />
       <Filter onChange={handleSearchTermChange} searchTerm={searchTerm} />
       <h3>add a new</h3>
       <PersonForm
