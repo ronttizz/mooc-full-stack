@@ -26,9 +26,7 @@ const App = () => {
           name: person.name,
           number: newPerson.number,
           id: person.id
-        }).then(res => {
-          fetchData()
-        })
+        }).then(res => fetchData())
       }
       setNewPerson(emptyPerson)
     } else {
