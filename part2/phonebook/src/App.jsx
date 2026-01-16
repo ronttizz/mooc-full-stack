@@ -19,7 +19,17 @@ const App = () => {
   const handleSubmit = (event) => {
     event.preventDefault()
     if (persons.some((person) => newPerson.name === person.name)) {
-      alert(`${newPerson.name} is already added to phonebook`)
+      const person = persons.find((person) => newPerson.name === person.name)
+      const replace = window.confirm(`${newPerson.name} is already added to phonebook, replace the old number with a new one?`)
+      if (replace) {
+        personsService.updateEntry(person.id, {
+          name: person.name,
+          number: newPerson.number,
+          id: person.id
+        }).then(res => {
+          fetchData()
+        })
+      }
       setNewPerson(emptyPerson)
     } else {
       personsService
