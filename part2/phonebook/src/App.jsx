@@ -25,11 +25,22 @@ const App = () => {
       const person = persons.find((person) => newPerson.name === person.name)
       const replace = window.confirm(`${newPerson.name} is already added to phonebook, replace the old number with a new one?`)
       if (replace) {
-        personsService.updateEntry(person.id, {
-          name: person.name,
-          number: newPerson.number,
-          id: person.id
-        }).then(res => fetchData())
+        personsService
+          .updateEntry(person.id, {
+            name: person.name,
+            number: newPerson.number,
+            id: person.id
+          })
+          .then(res => fetchData())
+          .catch(err => {
+            setNotification({
+              message: `Information of ${person.name} has already been removed from server`,
+              level: 'error'
+            })
+            setTimeout(() => {
+              setNotification(emptyError)
+            }, 5000)
+          })
       }
       setNewPerson(emptyPerson)
     } else {
