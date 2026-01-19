@@ -4,6 +4,7 @@ import { useState } from "react"
 
 const App = () => {
   const [countries, setCountries] = useState([])
+  const [search, setSearch] = useState('')
 
   const fetchData = () => {
     axios
@@ -17,7 +18,7 @@ const App = () => {
 
   return (
     <div>
-      <div>find countries <input></input></div>
+      <div>find countries <input onChange={(event) => setSearch(event.target.value)} value={search} /></div>
     </div>
   )
 }
