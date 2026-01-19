@@ -10,9 +10,10 @@ const App = () => {
       .get('https://studies.cs.helsinki.fi/restcountries/api/all')
       .then(res => {
         console.log(res.data)
+        setCountries(res.data)
       })
   }
-  useEffect(fetchData,[])
+  useEffect(fetchData, [])
 
   return (
     <div>
