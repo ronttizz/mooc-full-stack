@@ -20,7 +20,7 @@ const App = () => {
   return (
     <div>
       <div>find countries <input onChange={(event) => setSearchTerm(event.target.value)} value={searchTerm} /></div>
-      <Countries countries={countries.filter(c => c.name.official.includes(searchTerm))} />
+      {searchTerm ? <Countries countries={countries.filter(c => c.name.common.toLowerCase().includes(searchTerm.toLowerCase()))} /> : ''}
     </div>
   )
 }
