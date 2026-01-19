@@ -1,4 +1,4 @@
-const Weather = ({capital}) => {
+const Weather = ({lat, lng}) => {
     return (
         <div>
           <h1>Weather in {capital}</h1>
