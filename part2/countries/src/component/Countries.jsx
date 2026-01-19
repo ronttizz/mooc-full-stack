@@ -7,10 +7,10 @@ const Countries = ({countries}) => {
     }
     return (
         <div>
-            <p>Some countries will be here</p>
-            {countries.map(country => {
-                <Country country={country} />
-            })}
+            {countries.length > 1 
+                ? countries.map(country => <p key={country.cca3}>{country.name.common}</p>)
+                : countries.map(country => <Country country={country} key={country.cca3} />)
+            }
         </div>
     )
 }
