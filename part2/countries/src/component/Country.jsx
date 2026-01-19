@@ -1,3 +1,5 @@
+import Weather from "./Weather"
+
 const Country = ({country}) => {
     const imgStyles = {
         'maxWidth': '300px',
@@ -15,6 +17,7 @@ const Country = ({country}) => {
                 {Object.values(country.languages).map(lang => <li key={lang}>{lang}</li>)}
             </ul>
             <img src={country.flags.svg} alt={country.name.official} style={imgStyles} />
+            <Weather lat={country.latlng[0]} lng={country.latlng[1]} city={country.capital} />
         </div>
     )
 }
