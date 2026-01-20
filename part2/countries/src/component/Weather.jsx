@@ -12,7 +12,6 @@ const Weather = ({lat, lng, city}) => {
         .get(`https://${baseurl}?lat=${lat}&lon=${lng}&exlude=${exclude}&appid=${api_key}&units=metric`)
         .then(res => {
           setWeatherData({...res.data})
-          console.log(weatherData)
       })
       .catch(err => console.log(err))
     }
@@ -21,9 +20,9 @@ const Weather = ({lat, lng, city}) => {
     return (
       <div>
         <h1>Weather in {city}</h1>
-        <p>Temperature {weatherData.temp} Celsius</p>
-        <p>PIC HERE</p>
-        <p>Wind 0 m/s</p>
+        <p>Temperature {weatherData.main.temp} Celsius</p>
+        <img src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`} alt={weatherData.weather[0].description} />
+        <p>Wind {weatherData.wind.speed} m/s</p>
       </div>
     )
 }
