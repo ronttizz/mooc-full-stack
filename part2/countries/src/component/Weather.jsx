@@ -17,6 +17,10 @@ const Weather = ({lat, lng, city}) => {
     }
     useEffect(fetchWeather, [])
 
+    if (Object.keys(weatherData).length === 0) {
+      return <p>Fetching weather data</p>
+    }
+
     return (
       <div>
         <h1>Weather in {city}</h1>
