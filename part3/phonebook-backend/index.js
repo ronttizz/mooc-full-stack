@@ -3,7 +3,7 @@ const app = express()
 const PORT = 3001
 const currentDate = new Date()
 
-const persons = [
+let persons = [
     { 
       "id": "1",
       "name": "Arto Hellas", 
@@ -43,6 +43,16 @@ app.get('/api/persons/:id', (request, response) => {
     response.status(404).end()
   }
   response.send(person)
+})
+
+app.delete('/api/persons/:id', (request, response) => {
+  const id = request.params.id
+  const person = persons.find(person => person.id === id)
+  if (!person) {
+    response.status(404).end()
+  }
+  persons = persons.filter(person => person.id !== id)
+  response.status(200).end()
 })
 
 app.get('/info', (request, response) => {
