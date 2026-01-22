@@ -3,3 +3,17 @@ GET http://localhost:3001/api/persons/
 
 ###
 DELETE http://localhost:3001/api/persons/4
+
+###
+POST http://localhost:3001/api/persons/
+content-type: application/json
+
+{
+    "name": "testing",
+    "number": "01-1231234"
+}
+
+### Failed post test
+POST http://localhost:3001/api/persons/
+content-type: application/json
+
