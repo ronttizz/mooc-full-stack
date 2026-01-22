@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const PORT = 3001
+const currentDate = new Date()
 
 const persons = [
     { 
@@ -31,11 +32,13 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
 
-app.get('/', (request, response) => {
-  console.log(`GET request handled`)
-  response.send('<h1>Hello</h1>')
-})
-
 app.get('/api/persons', (request, response) => {
   response.send(persons)
+})
+
+app.get('/info', (request, response) => {
+  response.send(`
+    <p>Phonebook has info for ${persons.length} people</p>
+    <p>${currentDate.toString()}</p>
+    `)
 })
