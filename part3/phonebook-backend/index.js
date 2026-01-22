@@ -26,6 +26,15 @@ let persons = [
     }
 ]
 
+const generateId = () => {
+  const rand_n = Math.random() * 100000
+  if (!persons.find(person => person.id == rand_n)) {
+    return rand_n
+  } else {
+    generateId()
+  }
+}
+
 app.use(express.json())
 
 app.listen(PORT, () => {
@@ -34,6 +43,23 @@ app.listen(PORT, () => {
 
 app.get('/api/persons', (request, response) => {
   response.send(persons)
+})
+
+app.post('/api/persons', (request, response) => {
+  const body = request.body
+  console.log(response.body)
+
+  if (!body.content) {
+    return response.status(400).json({
+      'error': 'content missing'
+    })
+  }
+
+  persons.concat({
+    ...body.content,
+    id: generateId()
+  })
+  response.send(201)
 })
 
 app.get('/api/persons/:id', (request, response) => {
