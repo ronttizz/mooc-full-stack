@@ -13,7 +13,22 @@ content-type: application/json
     "number": "01-1231234"
 }
 
-### Failed post test
+### Failed post tests
 POST http://localhost:3001/api/persons/
 content-type: application/json
 
+### No name test
+POST http://localhost:3001/api/persons/
+content-type: application/json
+
+{
+    "number": "01-1231234"
+}
+
+### No number test
+POST http://localhost:3001/api/persons/
+content-type: application/json
+
+{
+    "name": "no number test"
+}
