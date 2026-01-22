@@ -27,7 +27,7 @@ let persons = [
 ]
 
 const generateId = () => {
-  const rand_n = Math.random() * 100000
+  const rand_n = Math.floor(Math.random() * 100000).toString()
   if (!persons.find(person => person.id == rand_n)) {
     return rand_n
   } else {
@@ -47,18 +47,17 @@ app.get('/api/persons', (request, response) => {
 
 app.post('/api/persons', (request, response) => {
   const body = request.body
-  console.log(response.body)
 
-  if (!body.content) {
+  if (!body) {
     return response.status(400).json({
       'error': 'content missing'
     })
   }
-
-  persons.concat({
-    ...body.content,
-    id: generateId()
-  })
+  const person = {
+    "id": generateId(),
+    ...body,
+  }
+  persons.push(person)
   response.send(201)
 })
 
