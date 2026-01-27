@@ -1,5 +1,6 @@
 const express = require('express')
 const morgan = require('morgan')
+const cors = require('cors')
 const app = express()
 const PORT = 3001
 const currentDate = new Date()
@@ -7,6 +8,7 @@ const currentDate = new Date()
 morgan.token('body', function (req, res) { return JSON.stringify(req.body) || '- no content' })
 
 app.use(express.json())
+app.use(cors())
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
 
 let persons = [
