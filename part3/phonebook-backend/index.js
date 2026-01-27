@@ -71,7 +71,7 @@ app.post('/api/persons', (request, response) => {
     ...body,
   }
   persons.push(person)
-  response.send(201)
+  response.json(person)
 })
 
 app.get('/api/persons/:id', (request, response) => {
@@ -90,7 +90,7 @@ app.delete('/api/persons/:id', (request, response) => {
     response.status(404).end()
   }
   persons = persons.filter(person => person.id !== id)
-  response.status(200).end()
+  response.status(200).json(person).end()
 })
 
 app.get('/info', (request, response) => {
