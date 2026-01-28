@@ -89,7 +89,7 @@ app.delete('/api/persons/:id', (request, response) => {
     response.status(404).end()
   }
   persons = persons.filter(person => person.id !== id)
-  response.status(200).json(person).end()
+  response.json(person).end()
 })
 
 app.get('/info', (request, response) => {
