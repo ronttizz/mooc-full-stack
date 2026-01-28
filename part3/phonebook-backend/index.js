@@ -31,6 +31,7 @@ let persons = [
 
 app.use(express.json())
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
+app.use(express.static('dist'))
 
 const generateId = () => {
   const rand_n = Math.floor(Math.random() * 100000).toString()
