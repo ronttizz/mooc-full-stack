@@ -7,7 +7,7 @@ if (process.argv.length < 3) {
 
 const password = process.argv[2]
 
-const url = `mongodb+srv://toninissinen_db_user:${password}@cluster0.xunuwbe.mongodb.net/?appName=Cluster0`
+const url = `mongodb+srv://toninissinen_db_user:${password}@cluster0.xunuwbe.mongodb.net/notesApp?appName=Cluster0`
 
 mongoose.set('strictQuery',false)
 
@@ -20,12 +20,47 @@ const noteSchema = new mongoose.Schema({
 
 const Note = mongoose.model('Note', noteSchema)
 
-const note = new Note({
-  content: 'HTML is easy',
-  important: true,
-})
+const notes = [
+  {
+    content: 'HTML is easy',
+    important: true,
+  },
+  {
+    content: 'CSS is hard',
+    important: true,
+  },
+  {
+    content: 'Mongoose makes things easy',
+    important: true,
+  },
+]
 
-note.save().then(result => {
-  console.log('note saved!')
+// const saveNotes = async () => {
+//   try {
+//     const result = await Note.insertMany(notes)
+//     console.log(`Saved ${result.length} notes`)
+//   } catch (error) {
+//     console.error(error)
+//   } finally {
+//     mongoose.connection.close()
+//   }
+// }
+
+// saveNotes()
+
+Note.find({}).then(result => {
+  result.forEach(note => {
+    console.log(note)
+  })
   mongoose.connection.close()
 })
+
+// const note = new Note({
+//   content: 'HTML is easy',
+//   important: true,
+// })
+
+// note.save().then(result => {
+//   console.log('note saved!')
+//   mongoose.connection.close()
+// })
