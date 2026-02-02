@@ -4,31 +4,32 @@ const morgan = require('morgan')
 const app = express()
 const PORT = process.env.PORT
 const currentDate = new Date()
+const Person = require('./models/person')
 
 morgan.token('body', function (req, res) { return JSON.stringify(req.body) || '- no content' })
 
-let persons = [
-    { 
-      "id": "1",
-      "name": "Arto Hellas", 
-      "number": "040-123456"
-    },
-    { 
-      "id": "2",
-      "name": "Ada Lovelace", 
-      "number": "39-44-5323523"
-    },
-    { 
-      "id": "3",
-      "name": "Dan Abramov", 
-      "number": "12-43-234345"
-    },
-    { 
-      "id": "4",
-      "name": "Mary Poppendieck", 
-      "number": "39-23-6423122"
-    }
-]
+// let persons = [
+//     { 
+//       "id": "1",
+//       "name": "Arto Hellas", 
+//       "number": "040-123456"
+//     },
+//     { 
+//       "id": "2",
+//       "name": "Ada Lovelace", 
+//       "number": "39-44-5323523"
+//     },
+//     { 
+//       "id": "3",
+//       "name": "Dan Abramov", 
+//       "number": "12-43-234345"
+//     },
+//     { 
+//       "id": "4",
+//       "name": "Mary Poppendieck", 
+//       "number": "39-23-6423122"
+//     }
+// ]
 
 app.use(express.json())
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
@@ -48,7 +49,9 @@ app.listen(PORT, () => {
 })
 
 app.get('/api/persons', (request, response) => {
-  response.send(persons)
+  Person.find({}).then(people => {
+    response.json(people)
+  })
 })
 
 app.post('/api/persons', (request, response) => {
@@ -60,18 +63,11 @@ app.post('/api/persons', (request, response) => {
     })
   }
 
-  if (persons.find(person => person.name === body.name)) {
-    return response.status(400).json({
-      'error': 'name must be unique'
-    })
-  }
-
-  const person = {
-    "id": generateId(),
-    ...body,
-  }
-  persons.push(person)
-  response.json(person)
+  const person = new Person(body)
+  
+  person.save().then(savedPerson => {
+    response.json(savedPerson)
+  })
 })
 
 app.get('/api/persons/:id', (request, response) => {
