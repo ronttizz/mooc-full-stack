@@ -20,20 +20,20 @@ const noteSchema = new mongoose.Schema({
 
 const Note = mongoose.model('Note', noteSchema)
 
-const notes = [
-  {
-    content: 'HTML is easy',
-    important: true,
-  },
-  {
-    content: 'CSS is hard',
-    important: true,
-  },
-  {
-    content: 'Mongoose makes things easy',
-    important: true,
-  },
-]
+// const notes = [
+//   {
+//     content: 'HTML is easy',
+//     important: true,
+//   },
+//   {
+//     content: 'CSS is hard',
+//     important: true,
+//   },
+//   {
+//     content: 'Mongoose makes things easy',
+//     important: true,
+//   },
+// ]
 
 // const saveNotes = async () => {
 //   try {
