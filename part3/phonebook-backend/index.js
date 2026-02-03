@@ -75,10 +75,14 @@ app.delete('/api/persons/:id', (request, response) => {
 })
 
 app.get('/info', (request, response) => {
-  response.send(`
-    <p>Phonebook has info for ${persons.length} people</p>
-    <p>${currentDate.toString()}</p>
-    `)
+  Person
+    .find({})
+    .then(people => {
+      response.send(`
+        <p>Phonebook has info for ${people.length} people</p>
+        <p>${currentDate.toString()}</p>
+        `)
+    })
 })
 
 app.use(errorHandler)
