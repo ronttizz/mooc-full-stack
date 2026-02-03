@@ -8,41 +8,9 @@ const Person = require('./models/person')
 
 morgan.token('body', function (req, res) { return JSON.stringify(req.body) || '- no content' })
 
-// let persons = [
-//     { 
-//       "id": "1",
-//       "name": "Arto Hellas", 
-//       "number": "040-123456"
-//     },
-//     { 
-//       "id": "2",
-//       "name": "Ada Lovelace", 
-//       "number": "39-44-5323523"
-//     },
-//     { 
-//       "id": "3",
-//       "name": "Dan Abramov", 
-//       "number": "12-43-234345"
-//     },
-//     { 
-//       "id": "4",
-//       "name": "Mary Poppendieck", 
-//       "number": "39-23-6423122"
-//     }
-// ]
-
 app.use(express.json())
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
 app.use(express.static('dist'))
-
-// const generateId = () => {
-//   const rand_n = Math.floor(Math.random() * 100000).toString()
-//   if (!persons.find(person => person.id == rand_n)) {
-//     return rand_n
-//   } else {
-//     generateId()
-//   }
-// }
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
@@ -80,13 +48,9 @@ app.get('/api/persons/:id', (request, response) => {
 })
 
 app.delete('/api/persons/:id', (request, response) => {
-  const id = request.params.id
-  const person = persons.find(person => person.id === id)
-  if (!person) {
-    response.status(404).end()
-  }
-  persons = persons.filter(person => person.id !== id)
-  response.json(person).end()
+  Person.findByIdAndDelete(request.params.id)
+    .then(result => response.status(204).end())
+    .catch(error => console.log(error))
 })
 
 app.get('/info', (request, response) => {
