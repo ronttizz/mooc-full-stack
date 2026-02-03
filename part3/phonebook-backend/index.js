@@ -55,6 +55,19 @@ app.get('/api/persons/:id', (request, response, next) => {
     .catch(error => next(error))
 })
 
+app.put('/api/persons/:id', (request, response, next) => {
+  Person
+    .findById(request.params.id)
+    .then(person => {
+      person.number = request.body.number
+      person
+        .save()
+        .then(result => response.status(200).end())
+        .catch(error => next(error))
+    })
+    .catch(error => next(error))
+})
+
 app.delete('/api/persons/:id', (request, response) => {
   Person.findByIdAndDelete(request.params.id)
     .then(result => response.status(204).end())
