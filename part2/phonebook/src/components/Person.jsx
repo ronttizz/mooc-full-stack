@@ -5,7 +5,7 @@ const Person = ({name, number, id, persons, setPersons}) => {
     const del = window.confirm(`Delete ${name} ?`)
     if (del) {
       personsService.deleteEntry(id).then(res => {
-        setPersons(persons.filter(p => p.id !== res.id))
+        setPersons(persons.filter(p => p.id !== id))
       })
     }
   }
