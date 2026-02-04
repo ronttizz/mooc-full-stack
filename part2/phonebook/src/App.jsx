@@ -32,9 +32,9 @@ const App = () => {
             id: person.id
           })
           .then(res => fetchData())
-          .catch(err => {
+          .catch(error => {
             setNotification({
-              message: `Information of ${person.name} has already been removed from server`,
+              message: error.response.data.error,
               level: 'error'
             })
             setTimeout(() => {
