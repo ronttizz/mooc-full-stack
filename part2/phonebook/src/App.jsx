@@ -12,7 +12,7 @@ const App = () => {
     number: '',
     id: null
   }
-  const emptyError = {message: '', level: null}
+  const emptyError = {message: '', level: null} // level: success || error
   const [persons, setPersons] = useState([])
   const [newPerson, setNewPerson] = useState(emptyPerson)
   const [searchTerm, setSearchTerm] = useState('')
@@ -55,6 +55,15 @@ const App = () => {
           setNotification({
             message: `Added ${res.name}`,
             level: 'success'
+          })
+          setTimeout(() => {
+            setNotification(emptyError)
+          }, 5000)
+        })
+        .catch(error => {
+          setNotification({
+            message: error.response.data.error,
+            level: 'error'
           })
           setTimeout(() => {
             setNotification(emptyError)
