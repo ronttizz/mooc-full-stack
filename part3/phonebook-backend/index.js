@@ -6,7 +6,7 @@ const PORT = process.env.PORT
 const currentDate = new Date()
 const Person = require('./models/person')
 
-morgan.token('body', function (req, res) { return JSON.stringify(req.body) || '- no content' })
+morgan.token('body', function (request, response) { return JSON.stringify(request.body) || '- no content' })
 
 const errorHandler = (error, request, response, next) => {
   if (error.name === 'CastError') {
@@ -42,7 +42,7 @@ app.post('/api/persons', (request, response, next) => {
   }
 
   const person = new Person(body)
-  
+
   person.save().then(savedPerson => {
     return response.json(savedPerson)
   }).catch(error => next(error))
@@ -68,7 +68,7 @@ app.put('/api/persons/:id', (request, response, next) => {
     .catch(error => next(error))
 })
 
-app.delete('/api/persons/:id', (request, response) => {
+app.delete('/api/persons/:id', (request, response, next) => {
   Person.findByIdAndDelete(request.params.id)
     .then(result => response.status(204).end())
     .catch(error => next(error))
