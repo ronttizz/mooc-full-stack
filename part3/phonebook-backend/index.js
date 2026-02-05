@@ -6,9 +6,9 @@ const PORT = process.env.PORT
 const currentDate = new Date()
 const Person = require('./models/person')
 
-morgan.token('body', function (request, response) { return JSON.stringify(request.body) || '- no content' })
+morgan.token('body', function (request, _response) { return JSON.stringify(request.body) || '- no content' })
 
-const errorHandler = (error, request, response, next) => {
+const errorHandler = (error, _request, response, next) => {
   if (error.name === 'CastError') {
     return response.status(400).send({ error: 'malformatted id' })
   } else if (error.name === 'ValidationError') {
@@ -26,7 +26,7 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
 
-app.get('/api/persons', (request, response, next) => {
+app.get('/api/persons', (_request, response, next) => {
   Person.find({}).then(people => {
     response.json(people)
   }).catch(error => next(error))
@@ -62,7 +62,7 @@ app.put('/api/persons/:id', (request, response, next) => {
       person.number = request.body.number
       person
         .save()
-        .then(result => response.status(200).end())
+        .then(_result => response.status(200).end())
         .catch(error => next(error))
     })
     .catch(error => next(error))
@@ -70,11 +70,11 @@ app.put('/api/persons/:id', (request, response, next) => {
 
 app.delete('/api/persons/:id', (request, response, next) => {
   Person.findByIdAndDelete(request.params.id)
-    .then(result => response.status(204).end())
+    .then(_result => response.status(204).end())
     .catch(error => next(error))
 })
 
-app.get('/info', (request, response) => {
+app.get('/info', (_request, response) => {
   Person
     .find({})
     .then(people => {
