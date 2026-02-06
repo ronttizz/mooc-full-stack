@@ -3,7 +3,7 @@
 GET http://localhost:3001/api/blogs
 
 ### POST
-POST http://localhost:3001/api/notes/
+POST http://localhost:3001/api/blogs
 Content-Type: application/json
 
 {
