@@ -1,12 +1,14 @@
-## GET
+### GET
 
 GET http://localhost:3001/api/blogs
 
-## POST
+### POST
 POST http://localhost:3001/api/notes/
 Content-Type: application/json
 
 {
-  "content": "VS code rest client is nice tool",
-  "important": true
+  "title": "Test blog entry",
+  "author": "Tester Dude",
+  "url": "http://www.example.com",
+  "likes": 5,
 }
