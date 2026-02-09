@@ -10,5 +10,5 @@ Content-Type: application/json
   "title": "Test blog entry",
   "author": "Tester Dude",
   "url": "http://www.example.com",
-  "likes": 5,
+  "likes": 5
 }
