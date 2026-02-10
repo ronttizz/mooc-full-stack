@@ -28,6 +28,42 @@ const favoriteBlog = (blogs) => {
   return favBlog
 }
 
+const mostBlogs = (blogs) => {
+  let most = {
+    'author': null,
+    'blogs': 0
+  }
+  blogs.forEach(blog => {
+    const count = blogs.reduce((total, cur) => {
+      return blog.author === cur.author ? ++total : total
+    }, 0)
+    if (count > most.blogs) {
+      most.author = blog.author
+      most.blogs = count
+    }
+  })
+  
+  return most
+}
+
+const mostLikes = (blogs) => {
+  let most = {
+    'author': null,
+    'likes': 0
+  }
+  blogs.forEach(blog => {
+    const count = blogs.reduce((total, cur) => {
+      return blog.author === cur.author ? total += cur.likes : total
+    }, 0)
+    if (count > most.likes) {
+      most.author = blog.author
+      most.likes = count
+    }
+  })
+  
+  return most
+}
+
 const listWithOneBlog = [
   {
     _id: '5a422aa71b54a676234d17f8',
@@ -94,6 +130,8 @@ module.exports = {
   dummy,
   totalLikes,
   favoriteBlog,
+  mostBlogs,
+  mostLikes,
   blogs,
   listWithOneBlog
 }
