@@ -1,4 +1,4 @@
-const { test, beforeEach, after } = require('node:test')
+const { test, beforeEach, after, expect } = require('node:test')
 const assert = require('node:assert')
 const mongoose = require('mongoose')
 const supertest = require('supertest')
@@ -17,6 +17,16 @@ test('all blogs are returned', async () => {
   const response = await api.get('/api/blogs')
 
   assert.strictEqual(response.body.length, listHelper.blogs.length)
+})
+
+test('all blogs have id', async () => {
+  const response = await api.get('/api/blogs')
+  const blogs = response.body
+
+  blogs.forEach(blog => {
+    assert.strictEqual(Object.hasOwn(blog, 'id'), true)
+    assert.strictEqual(Object.hasOwn(blog, '_id'), false)
+  })
 })
 
 after(async () => {
