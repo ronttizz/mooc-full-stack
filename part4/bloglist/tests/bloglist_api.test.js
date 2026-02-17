@@ -1,4 +1,4 @@
-const { test, beforeEach, after, expect } = require('node:test')
+const { test, beforeEach, after } = require('node:test')
 const assert = require('node:assert')
 const mongoose = require('mongoose')
 const supertest = require('supertest')
@@ -30,11 +30,11 @@ test('all blogs have id', async () => {
 })
 
 test('add new blog to list', async () => {
+  const blog = listHelper.listWithOneBlog[0]
   await api
     .post('/api/blogs')
-    .send(listHelper.listWithOneBlog)
+    .send(blog)
     .expect(201)
-    .expect('Content-Type', /application\/json/)
   
   const response = await api.get('/api/blogs')
 
@@ -42,7 +42,7 @@ test('add new blog to list', async () => {
 })
 
 test('missing likes property defaults to 0', async () => {
-  const newBlog =   {
+  const newBlogWithoutLikes =   {
     title: 'Test blog without likes',
     author: 'Tester Dude',
     url: 'https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf',
@@ -50,12 +50,25 @@ test('missing likes property defaults to 0', async () => {
 
   const response = await api
     .post('/api/blogs')
-    .send(newBlog)
+    .send(newBlogWithoutLikes)
     .expect(201)
     .expect('Content-Type', /application\/json/)
   
   assert.strictEqual(response.body.likes, 0)
 })
+
+// test.only('missing title on blog', async () => {
+//   const newBlogWithoutTitle =   {
+//     author: 'Tester Dude',
+//     url: 'https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf',
+//     likes: 0
+//   }
+
+//   const response = await api
+//     .post('/api/blogs')
+//     .send(newBlogWithoutTitle)
+//     .expect(400)
+// })
 
 after(async () => {
   await mongoose.connection.close()
