@@ -41,6 +41,22 @@ test('add new blog to list', async () => {
   assert.strictEqual(response.body.length, listHelper.blogs.length + 1)
 })
 
+test('missing likes property defaults to 0', async () => {
+  const newBlog =   {
+    title: 'Test blog without likes',
+    author: 'Tester Dude',
+    url: 'https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf',
+  }
+
+  const response = await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+  
+  assert.strictEqual(response.body.likes, 0)
+})
+
 after(async () => {
   await mongoose.connection.close()
 })
