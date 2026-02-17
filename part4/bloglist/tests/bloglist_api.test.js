@@ -29,6 +29,18 @@ test('all blogs have id', async () => {
   })
 })
 
+test('add new blog to list', async () => {
+  await api
+    .post('/api/blogs')
+    .send(listHelper.listWithOneBlog)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+  
+  const response = await api.get('/api/blogs')
+
+  assert.strictEqual(response.body.length, listHelper.blogs.length + 1)
+})
+
 after(async () => {
   await mongoose.connection.close()
 })
