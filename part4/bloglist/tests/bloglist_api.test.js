@@ -5,6 +5,7 @@ const supertest = require('supertest')
 const listHelper = require('../utils/list_helper')
 const app = require('../app')
 const Blog = require('../models/blog')
+const blog = require('../models/blog')
 
 const api = supertest(app)
 
@@ -92,8 +93,28 @@ describe('test DELETE operation', () => {
   
   test('with valid ID', async () => {
     await api
-      .delete('/api/blogs/5a422bc61b54a676234d17fc')
+      .delete('/api/blogs/5a422ba71b54a676234d17fb')
       .expect(204)
+  })
+})
+
+describe('test PUT operation', () => {
+  test('with invalid ID', async () => {
+    await api
+      .put('/api/blogs/5a422bc61b54a676234d17fd')
+      .expect(404)
+  })
+  
+  test('with valid ID', async () => {
+    const id = "5a422ba71b54a676234d17fb"
+    await api
+      .put('/api/blogs/' + id)
+      .expect(200)
+    
+    const response = await api.get('/api/blogs')
+    const blog = response.body.filter(blog => blog.id === id)
+
+    assert.strictEqual(blog[0].likes, 1)
   })
 })
 
