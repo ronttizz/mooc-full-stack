@@ -1,4 +1,4 @@
-const { test, beforeEach, after } = require('node:test')
+const { test, beforeEach, after, describe } = require('node:test')
 const assert = require('node:assert')
 const mongoose = require('mongoose')
 const supertest = require('supertest')
@@ -81,6 +81,20 @@ test('missing url on blog result HTTP 400', async () => {
     .post('/api/blogs')
     .send(newBlogWithoutUrl)
     .expect(400)
+})
+
+describe('test DELETE operation', () => {
+  test('with invalid ID', async () => {
+    await api
+      .delete('/api/blogs/5a422bc61b54a676234d17fd')
+      .expect(404)
+  })
+  
+  test('with valid ID', async () => {
+    await api
+      .delete('/api/blogs/5a422bc61b54a676234d17fc')
+      .expect(204)
+  })
 })
 
 after(async () => {
