@@ -58,26 +58,26 @@ test('missing likes property defaults to 0', async () => {
 })
 
 test('missing title on blog result HTTP 400', async () => {
-  const newBlogWithoutTitle =   {
+  const newBlogWithoutTitle = {
     author: 'Tester Dude',
     url: 'https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf',
     likes: 0
   }
 
-  const response = await api
+  await api
     .post('/api/blogs')
     .send(newBlogWithoutTitle)
     .expect(400)
 })
 
 test('missing url on blog result HTTP 400', async () => {
-  const newBlogWithoutUrl =   {
+  const newBlogWithoutUrl = {
     title: 'Testing Missing URL',
     author: 'Tester Dude',
     likes: 0
   }
 
-  const response = await api
+  await api
     .post('/api/blogs')
     .send(newBlogWithoutUrl)
     .expect(400)
