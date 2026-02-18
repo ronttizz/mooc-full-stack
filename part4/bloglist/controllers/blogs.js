@@ -9,6 +9,9 @@ blogsRouter.get('/', (request, response, next) => {
 
 blogsRouter.post('/', (request, response, next) => {
   const blog = new Blog(request.body)
+  if (blog.title === undefined || blog.url === undefined) {
+    return response.status(400).end()
+  }
 
   blog.save().then((result) => {
     response.status(201).json(result)
