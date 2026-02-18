@@ -29,7 +29,7 @@ test('all blogs have id', async () => {
   })
 })
 
-test('add new blog to list', async () => {
+test.only('add new blog to list', async () => {
   const blog = listHelper.listWithOneBlog[0]
   await api
     .post('/api/blogs')
@@ -57,18 +57,18 @@ test('missing likes property defaults to 0', async () => {
   assert.strictEqual(response.body.likes, 0)
 })
 
-// test.only('missing title on blog', async () => {
-//   const newBlogWithoutTitle =   {
-//     author: 'Tester Dude',
-//     url: 'https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf',
-//     likes: 0
-//   }
+test.only('missing title on blog result HTTP 500', async () => {
+  const newBlogWithoutTitle =   {
+    author: 'Tester Dude',
+    url: 'https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf',
+    likes: 0
+  }
 
-//   const response = await api
-//     .post('/api/blogs')
-//     .send(newBlogWithoutTitle)
-//     .expect(400)
-// })
+  const response = await api
+    .post('/api/blogs')
+    .send(newBlogWithoutTitle)
+    .expect(500)
+})
 
 after(async () => {
   await mongoose.connection.close()

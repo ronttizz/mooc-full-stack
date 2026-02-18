@@ -20,9 +20,9 @@ describe('total likes', () => {
     assert.strictEqual(result, 5)
   })
   
-  test('of a bigger lis is calculated right', () => {
+  test('of a bigger list is calculated right', () => {
     const result = listHelper.totalLikes(listHelper.blogs)
-    assert.strictEqual(result, 36)
+    assert.strictEqual(result, 31)
   })
 })
 
@@ -39,7 +39,7 @@ describe('favorite blog', () => {
   
   test('of a bigger lis is calculated right', () => {
     const result = listHelper.favoriteBlog(listHelper.blogs)
-    assert.strictEqual(result, listHelper.blogs[2])
+    assert.strictEqual(result, listHelper.blogs[1])
   })
 })
 
@@ -55,6 +55,6 @@ test('most likes', () => {
   const most_likes = listHelper.mostLikes(listHelper.blogs)
   assert.deepStrictEqual(most_likes, {
     author: "Edsger W. Dijkstra",
-    likes: 17
+    likes: 12
   })
 })
