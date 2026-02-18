@@ -57,7 +57,7 @@ test('missing likes property defaults to 0', async () => {
   assert.strictEqual(response.body.likes, 0)
 })
 
-test('missing title on blog result HTTP 500', async () => {
+test('missing title on blog result HTTP 400', async () => {
   const newBlogWithoutTitle =   {
     author: 'Tester Dude',
     url: 'https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf',
@@ -67,7 +67,20 @@ test('missing title on blog result HTTP 500', async () => {
   const response = await api
     .post('/api/blogs')
     .send(newBlogWithoutTitle)
-    .expect(500)
+    .expect(400)
+})
+
+test('missing url on blog result HTTP 400', async () => {
+  const newBlogWithoutUrl =   {
+    title: 'Testing Missing URL',
+    author: 'Tester Dude',
+    likes: 0
+  }
+
+  const response = await api
+    .post('/api/blogs')
+    .send(newBlogWithoutUrl)
+    .expect(400)
 })
 
 after(async () => {
