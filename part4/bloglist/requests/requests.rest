@@ -15,6 +15,16 @@ Content-Type: application/json
   "likes": 5
 }
 
+### POST/CREATE USER
+POST http://localhost:3001/api/users
+Content-Type: application/json
+
+{
+  "username": "",
+  "name": "",
+  "password": ""
+}
+
 ### DELETE BLGO
 DELETE http://localhost:3001/api/blogs/698989944dbb62893cf3f7a2
 
