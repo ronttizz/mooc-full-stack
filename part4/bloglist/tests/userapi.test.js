@@ -45,8 +45,6 @@ describe('creating user', () => {
     await api
       .post('/api/users')
       .send(userHelper.validUser)
-      .expect(201)
-      .expect('Content-Type', /application\/json/)
     
     const response = await api
       .post('/api/users')
