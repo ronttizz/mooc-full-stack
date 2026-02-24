@@ -1,8 +1,7 @@
-### GET
-
+### GET BLGOS
 GET http://localhost:3001/api/blogs
 
-### POST
+### POST BLOG
 POST http://localhost:3001/api/blogs
 Content-Type: application/json
 
@@ -13,8 +12,8 @@ Content-Type: application/json
   "likes": 5
 }
 
-### DELETE
+### DELETE BLGO
 DELETE http://localhost:3001/api/blogs/698989944dbb62893cf3f7a2
 
-### PUT/UPDATE
+### PUT/UPDATE BLOG
 PUT http://localhost:3001/api/blogs/699580697cee531696a0eb3c
