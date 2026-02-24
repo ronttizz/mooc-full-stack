@@ -4,6 +4,7 @@ mongoose.set('strictQuery', false)
 const userSchema = mongoose.Schema({
   username: {
     type: String,
+    minLength: 3,
     required: true,
     unique: true
   },
