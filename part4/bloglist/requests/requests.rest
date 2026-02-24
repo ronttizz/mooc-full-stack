@@ -1,6 +1,9 @@
 ### GET BLGOS
 GET http://localhost:3001/api/blogs
 
+### GET USERS
+GET http://localhost:3001/api/users
+
 ### POST BLOG
 POST http://localhost:3001/api/blogs
 Content-Type: application/json
