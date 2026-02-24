@@ -40,6 +40,22 @@ describe('creating user', () => {
 
     assert.strictEqual(response.body.error, 'password should be at least 3 characters')
   })
+  
+  test('with duplicate username', async () => {
+    await api
+      .post('/api/users')
+      .send(userHelper.validUser)
+      .expect(201)
+      .expect('Content-Type', /application\/json/)
+    
+    const response = await api
+      .post('/api/users')
+      .send(userHelper.validUser)
+      .expect(400)
+      .expect('Content-Type', /application\/json/)
+    
+    assert.strictEqual(response.body.error, "expected `username` to be unique")
+  })
 })
 
 after(async () => {
