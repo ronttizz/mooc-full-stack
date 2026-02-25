@@ -1,3 +1,6 @@
+const mongoose = require('mongoose')
+const User = require('../models/user')
+
 const validUser = {
   "username": "test",
   "name": "Tester Dude",
@@ -16,8 +19,14 @@ const userWithInvalidPassword = {
   "password": "re"
 }
 
+const usersInDb = async () => {
+  const users = await User.find({})
+  return users
+}
+
 module.exports = {
   validUser,
   userWithInvalidUsername,
-  userWithInvalidPassword
+  userWithInvalidPassword,
+  usersInDb
 }
