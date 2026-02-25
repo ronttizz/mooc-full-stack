@@ -23,7 +23,7 @@ blogsRouter.post('/', async (request, response, next) => {
   const users = await userHelper.usersInDb()
   const user = users[0]
 
-  const res = await blog.save()
+  await blog.save()
 
   user.blogs = user.blogs.concat(blog._id)
   await user.save()
