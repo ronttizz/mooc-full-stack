@@ -20,9 +20,9 @@ POST http://localhost:3001/api/users
 Content-Type: application/json
 
 {
-  "username": "",
-  "name": "",
-  "password": ""
+  "username": "tester-dude",
+  "name": "Dude",
+  "password": "salainen"
 }
 
 ### DELETE BLGO
