@@ -20,14 +20,15 @@ blogsRouter.post('/', async (request, response, next) => {
     return response.status(400).end()
   }
 
-  userHelper.usersInDb().then((res) => {
-    blog.user = res[0]._id
-    blog.save().then((result) => {
-      response.status(201).json(result)
-    }).catch(error => next(error))
-  })
+  const users = await userHelper.usersInDb()
+  const user = users[0]
 
+  const res = await blog.save()
 
+  user.blogs = user.blogs.concat(blog._id)
+  await user.save()
+
+  response.status(201).json(blog)
 })
 
 blogsRouter.delete('/:id', async (request, response, next) => {

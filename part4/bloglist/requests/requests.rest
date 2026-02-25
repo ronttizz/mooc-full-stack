@@ -9,10 +9,10 @@ POST http://localhost:3001/api/blogs
 Content-Type: application/json
 
 {
-  "title": "Test blog entry",
-  "author": "Tester Dude",
-  "url": "http://www.example.com",
-  "likes": 5
+  "title": "React patterns",
+  "author": "Michael Chan",
+  "url": "https://reactpatterns.com/",
+  "likes": 7
 }
 
 ### POST/CREATE USER
@@ -20,8 +20,8 @@ POST http://localhost:3001/api/users
 Content-Type: application/json
 
 {
-  "username": "tester-dude",
-  "name": "Dude",
+  "username": "root",
+  "name": "Super User",
   "password": "salainen"
 }
 
