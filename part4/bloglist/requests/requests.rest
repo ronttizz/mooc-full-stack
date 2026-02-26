@@ -30,3 +30,12 @@ DELETE http://localhost:3001/api/blogs/698989944dbb62893cf3f7a2
 
 ### PUT/UPDATE BLOG
 PUT http://localhost:3001/api/blogs/699580697cee531696a0eb3c
+
+### LOGIN USER
+POST http://localhost:3001/api/login
+Content-Type: application/json
+
+{
+  "username": "root",
+  "password": "salainen"
+}
