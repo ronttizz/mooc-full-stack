@@ -25,7 +25,7 @@ Content-Type: application/json
   "password": "salainen"
 }
 
-### DELETE BLGO
+### DELETE BLOG
 DELETE http://localhost:3001/api/blogs/698989944dbb62893cf3f7a2
 
 ### PUT/UPDATE BLOG
