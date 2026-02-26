@@ -9,6 +9,7 @@ const middleware = require('./utils/middleware')
 const app = express()
 
 app.use(express.json())
+app.use(middleware.tokenExtractor)
 
 mongoose.connect(config.MONGODB_URI, { family: 4 })
   .then(_result => {
