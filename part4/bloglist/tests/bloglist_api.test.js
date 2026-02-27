@@ -3,10 +3,21 @@ const assert = require('node:assert')
 const mongoose = require('mongoose')
 const supertest = require('supertest')
 const listHelper = require('../utils/list_helper')
+const userHelper = require('../utils/user_helper')
 const app = require('../app')
 const Blog = require('../models/blog')
 
 const api = supertest(app)
+
+const getUser = async () => {
+  const user = userHelper.validUser
+  delete user.name
+  const loggedInUser = await api
+    .post('/api/login')
+    .send(user)
+  
+  return loggedInUser.body
+}
 
 beforeEach(async () => {
   await Blog.deleteMany({})
@@ -30,10 +41,12 @@ test('all blogs have id', async () => {
 })
 
 test('add new blog to list', async () => {
+  const user = await getUser()
   const blog = listHelper.listWithOneBlog[0]
   await api
     .post('/api/blogs')
     .send(blog)
+    .set('Authorization', 'Bearer ' + user.token)
     .expect(201)
   
   const response = await api.get('/api/blogs')
@@ -47,10 +60,13 @@ test('missing likes property defaults to 0', async () => {
     author: 'Tester Dude',
     url: 'https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf',
   }
+  
+  const user = await getUser()
 
   const response = await api
     .post('/api/blogs')
     .send(newBlogWithoutLikes)
+    .set('Authorization', 'Bearer ' + user.token)
     .expect(201)
     .expect('Content-Type', /application\/json/)
   
@@ -64,9 +80,12 @@ test('missing title on blog result HTTP 400', async () => {
     likes: 0
   }
 
+  const user = await getUser()
+
   await api
     .post('/api/blogs')
     .send(newBlogWithoutTitle)
+    .set('Authorization', 'Bearer ' + user.token)
     .expect(400)
 })
 
@@ -77,9 +96,12 @@ test('missing url on blog result HTTP 400', async () => {
     likes: 0
   }
 
+  const user = await getUser()
+
   await api
     .post('/api/blogs')
     .send(newBlogWithoutUrl)
+    .set('Authorization', 'Bearer ' + user.token)
     .expect(400)
 })
 
