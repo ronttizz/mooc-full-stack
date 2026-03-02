@@ -6,6 +6,7 @@ const listHelper = require('../utils/list_helper')
 const userHelper = require('../utils/user_helper')
 const app = require('../app')
 const Blog = require('../models/blog')
+const User = require('../models/user')
 
 const api = supertest(app)
 
@@ -20,8 +21,15 @@ const getUser = async () => {
 }
 
 beforeEach(async () => {
+  const user = await User.find({})
   await Blog.deleteMany({})
-  await Blog.insertMany(listHelper.blogs)
+  const blogs = listHelper.blogs.map(blog => {
+    return blog = {
+      ...blog,
+      user: user[0]._id.toString()
+    }
+  })
+  await Blog.insertMany(blogs)
 })
 
 test('all blogs are returned', async () => {
@@ -117,14 +125,19 @@ test('missing url on blog result HTTP 400', async () => {
 
 describe('test DELETE operation', () => {
   test('with invalid ID', async () => {
+    const user = await getUser()
     await api
       .delete('/api/blogs/5a422bc61b54a676234d17fd')
+      .set('Authorization', 'Bearer ' + user.token)
       .expect(404)
   })
-  
+
   test('with valid ID', async () => {
-    await api
-      .delete('/api/blogs/5a422ba71b54a676234d17fb')
+    const user = await getUser()
+    const blogId = listHelper.blogs[4]._id
+    const res = await api
+      .delete('/api/blogs/' + blogId)
+      .set('Authorization', 'Bearer ' + user.token)
       .expect(204)
   })
 })
