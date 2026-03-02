@@ -57,7 +57,7 @@ describe('adding new blog', () => {
 
   test('without proper token', async () => {
     const blog = listHelper.listWithOneBlog[0]
-    const res = await api
+    await api
       .post('/api/blogs')
       .send(blog)
       .expect(401)
