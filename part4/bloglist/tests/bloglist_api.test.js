@@ -40,18 +40,28 @@ test('all blogs have id', async () => {
   })
 })
 
-test('add new blog to list', async () => {
-  const user = await getUser()
-  const blog = listHelper.listWithOneBlog[0]
-  await api
-    .post('/api/blogs')
-    .send(blog)
-    .set('Authorization', 'Bearer ' + user.token)
-    .expect(201)
-  
-  const response = await api.get('/api/blogs')
+describe('adding new blog', () => {
+  test('with proper token', async () => {
+    const user = await getUser()
+    const blog = listHelper.listWithOneBlog[0]
+    await api
+      .post('/api/blogs')
+      .send(blog)
+      .set('Authorization', 'Bearer ' + user.token)
+      .expect(201)
+    
+    const response = await api.get('/api/blogs')
 
-  assert.strictEqual(response.body.length, listHelper.blogs.length + 1)
+    assert.strictEqual(response.body.length, listHelper.blogs.length + 1)
+  })
+
+  test('without proper token', async () => {
+    const blog = listHelper.listWithOneBlog[0]
+    const res = await api
+      .post('/api/blogs')
+      .send(blog)
+      .expect(401)
+  })
 })
 
 test('missing likes property defaults to 0', async () => {
