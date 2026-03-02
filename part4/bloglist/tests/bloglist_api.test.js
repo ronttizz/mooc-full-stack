@@ -135,7 +135,7 @@ describe('test DELETE operation', () => {
   test('with valid ID', async () => {
     const user = await getUser()
     const blogId = listHelper.blogs[4]._id
-    const res = await api
+    await api
       .delete('/api/blogs/' + blogId)
       .set('Authorization', 'Bearer ' + user.token)
       .expect(204)
