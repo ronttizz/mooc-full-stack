@@ -71,7 +71,6 @@ const listWithOneBlog = [
     author: 'Edsger W. Dijkstra',
     url: 'https://homepages.cwi.nl/~storm/teaching/reader/Dijkstra68.pdf',
     likes: 5,
-    user: '69a545142cdc4f46a7bff7ee',
     __v: 0
   }
 ]
@@ -83,7 +82,6 @@ const blogs = [
     author: "Michael Chan",
     url: "https://reactpatterns.com/",
     likes: 7,
-    user: '69a545142cdc4f46a7bff7ee',
     __v: 0
   },
   {
@@ -92,7 +90,6 @@ const blogs = [
     author: "Edsger W. Dijkstra",
     url: "http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html",
     likes: 12,
-    user: '69a545142cdc4f46a7bff7ee',
     __v: 0
   },
   {
@@ -101,7 +98,6 @@ const blogs = [
     author: "Robert C. Martin",
     url: "http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll",
     likes: 10,
-    user: '69a545142cdc4f46a7bff7ee',
     __v: 0
   },
   {
@@ -118,7 +114,6 @@ const blogs = [
     author: "Robert C. Martin",
     url: "http://blog.cleancoder.com/uncle-bob/2016/05/01/TypeWars.html",
     likes: 2,
-    user: '69a545142cdc4f46a7bff7ee',
     __v: 0
   }  
 ]
